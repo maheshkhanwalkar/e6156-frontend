@@ -1,0 +1,14 @@
+/* Post */
+div img {
+    width: 300px;
+    height: 200px;
+}
+
+.post-elem {
+    /*width: 800px;
+    height: 600px;*/
+    border: 1px solid black;
+    /*position: fixed;
+    left: 50%;
+    margin-left: -400px;*/
+}
