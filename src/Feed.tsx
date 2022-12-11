@@ -71,6 +71,7 @@ class Feed extends React.Component<FeedProps> {
         return (
             <div className="feed-elem">
                 <h1>Feed</h1>
+                <button onClick={(e) => window.location.href='/create'}>Create Post</button>
                 {this.createPostComponents(posts)}
             </div>
         )
