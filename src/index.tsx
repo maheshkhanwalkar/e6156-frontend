@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 import Feed from "./Feed";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes, useSearchParams} from "react-router-dom";
 import CreatePost from "./CreatePost";
+import Home from "./Home";
+import Profile from "./Profile";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,14 +14,47 @@ const root = ReactDOM.createRoot(
 root.render(
     <Router>
         <Routes>
-            <Route path='/feed' element={<Feed userId="5bb739ff-fab4-4eda-adcc-54c0efd6d337"/>} />
-            <Route path='/create' element={<CreatePost userId="5bb739ff-fab4-4eda-adcc-54c0efd6d337" />} />
+            <Route path='/' element={<Home />}/>
+            <Route path='/feed' element={<FeedFunction/>} />
+            <Route path='/create' element={<PostFunction/>} />
+            <Route path='/profile' element={<ProfileFunction/>}/>
         </Routes>
     </Router>
-
-    /*<Post name="John Doe" subject="Snowy Mountain"
-          url="https://api.five-lions-e6156.com/v1/image/21faa3b1-a16d-44fb-adeb-9632864bad0b"/>*/
 );
+
+function FeedFunction() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    let userId = searchParams.get("userId")
+
+    console.log(userId)
+
+    return (
+        <Feed userId={userId!} />
+    )
+}
+
+function PostFunction() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    let userId = searchParams.get("userId")
+
+    console.log(userId)
+
+    return (
+        <CreatePost userId={userId!}/>
+    )
+}
+
+function ProfileFunction() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    let userId = searchParams.get("userId")
+
+    console.log(userId)
+
+    return (
+        <Profile userId={userId!}/>
+    )
+}
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

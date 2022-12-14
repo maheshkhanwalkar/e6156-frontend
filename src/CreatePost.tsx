@@ -60,6 +60,7 @@ class CreatePost extends React.Component<CreatePostProps> {
                 body: data
             }).then((res) => res.json())
                 .then((data) => console.log(data))
+                .then(() => window.location.href = '/feed?userId=' + this.props.userId)
         }
 
         return (

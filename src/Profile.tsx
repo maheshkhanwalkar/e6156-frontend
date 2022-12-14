@@ -1,10 +1,13 @@
-import React from "react";
-import './post.css';
+import React from 'react'
 
-interface PostProps {
-    userId: string,
-    subject: string,
-    url: string
+interface ProfileProps {
+    userId: string
+}
+
+type ProfileState = {
+    firstName: string
+    lastName: string
+    isLoading: boolean
 }
 
 interface ProfileJson {
@@ -12,15 +15,9 @@ interface ProfileJson {
     lastName: string
 }
 
-type PostState = {
-    firstName: string
-    lastName: string
-    isLoading: boolean
-}
+class Profile extends React.Component<ProfileProps> {
 
-class Post extends React.Component<PostProps> {
-
-    constructor(props: PostProps) {
+    constructor(props: ProfileProps) {
         super(props);
 
         this.state = {
@@ -50,24 +47,21 @@ class Post extends React.Component<PostProps> {
     }
 
     render() {
-        let {firstName, lastName, isLoading} = this.state as PostState
+        let {firstName, lastName, isLoading} = this.state as ProfileState
 
         if(isLoading) {
             return (
                 <div></div>
-            )
+            );
         }
 
         return (
-            <div className="post-elem">
-                <p><a href={'/profile?userId=' + this.props.userId}>{firstName + " " + lastName}</a> </p>
-                <p><b>{this.props.subject}</b></p>
-                <div className="image-elem">
-                    <img src={this.props.url} alt={"unknown"}/>
-                </div>
+            <div className="profile-elem">
+                <h1>{firstName} {lastName}</h1>
+                <button>Follow {firstName}</button>
             </div>
         )
     }
 }
 
-export default Post;
+export default Profile;

@@ -6,6 +6,7 @@ interface FeedProps {
 }
 
 interface PostJson {
+    userId: string,
     imageId: string,
     postId: string,
     subject: string
@@ -45,7 +46,6 @@ class Feed extends React.Component<FeedProps> {
     }
 
     componentDidMount() {
-        // this.setState({isLoading: true})
         let feed_url = 'https://api.five-lions-e6156.com/v1/feed/' + this.props.userId;
 
         fetch(feed_url)
@@ -57,7 +57,7 @@ class Feed extends React.Component<FeedProps> {
         let image_url = 'https://api.five-lions-e6156.com/v1/image/'
 
         return posts.map(post => {
-            return <Post key={post.postId} name='test' subject={post.subject} url={image_url + post.imageId}/>
+            return <Post key={post.postId} userId={post.userId} subject={post.subject} url={image_url + post.imageId}/>
         })
     }
 
@@ -71,7 +71,7 @@ class Feed extends React.Component<FeedProps> {
         return (
             <div className="feed-elem">
                 <h1>Feed</h1>
-                <button onClick={(e) => window.location.href='/create'}>Create Post</button>
+                <button onClick={(e) => window.location.href='/create?userId=' + this.props.userId}>Create Post</button>
                 {this.createPostComponents(posts)}
             </div>
         )
